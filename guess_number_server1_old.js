@@ -20,8 +20,6 @@ function check_number( check_number ){
   if(check_number == rnd_number){
     console.log("Number is equal");
     server_data = "Number is equal";
-    //when client and server number is equal , server generate new random number
-    random_number(); 
   }
 
   else {
@@ -61,19 +59,50 @@ var cors = function(req, res, next){
 //express use CORS
 application.use(cors);
 
-//http-request to url "SERVER_HOST/guess"
+//http-request to url "SERVER_HOST/calculate_numbers"
 function request_function1( http_request, http_response){
   console.log("Calculate request happens !");
+
   var  message_for_client = "Server calculate numbers for you .";	
+ 
   var obj = http_request.query.data1; //Object -> String array of key-value pairs --> Get  ?value1=123‚ value2=345, value3=abcd 
-  //console.log(obj);
+// http_request.query.
+
+
+  
+  //you can for-each object of GET values
+  //var numbers = obj.value2;
+  
+  console.log(obj);
+
   var compare_text = check_number(obj); //check if number equal or is biger or smaller than
+  
+  //console.log(http_request.query);
+
+  /*
+  struct obj{ int value2; }
+
+     <input type="text" id="age" value="50">
+
+      var a = document.getElementById("age").value; 
+    */    
+
+  //http_response.send("moi");
   http_response.send(compare_text);
 }
 
+/*
+function request_function2( http_request, http_response ){
+
+  random_number();
+
+}
+*/
 
 //---------------------------------------------------------
 application.get('/guess', request_function1);
+
+//application.post('/guess', request_function2 );
 
 //listern server port + init function
 function  server_init(){
