@@ -1,0 +1,79 @@
+
+<script type="text/javascript">
+//cookies + fetch
+
+function sendDataToServer(){
+
+
+	console.log("Send cookies to server !");
+
+	var f_a = document.getElementById("a_id").value;
+	var f_b = document.getElementById("b_id").value;
+
+	var postBody = "1234"; //document.cookies;  //JSON.stringify(); 
+
+
+	let postData = {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(postBody),
+	};
+
+
+	let host = 'http://127.0.0.1:8283';
+	let link = '/cookies_to_server1';	
+
+
+	//read cookies
+
+
+	// ---------- my functions ------------------------------
+
+	// postBody -> var x = document.cookies ????
+	
+	//var url = "http://127.0.0.1:8283/cookies_to_server1";
+
+	//fetch( url , postBody)
+
+	//.then()
+
+	//.catch(){}	
+
+	fetch(host + link, postData)
+        .then(resp => {
+         return resp.json();
+        })
+        .then(r => {
+         //back-end response here
+        //*********************************************************************** */
+      })
+      .catch(err => {
+        console.log('404 error, page not found');
+        console.log('ERR', err);
+});
+
+
+
+
+	//--------- w3school cookies handler ---------------------
+
+
+
+}
+
+</script>
+
+<html>
+<title> Cookies to server, test 2 </title>
+<body>
+	<h1>  Cookies to server, test 2  </h1>
+	<br /><br />
+	Cookies A: <input type="text" id="a_id" /><br />
+	Cookies B: <input type="text" id="b_id" /><br />
+	<button onClick="sendDataToServer()"> Send cookies to server </button>
+</body>
+</html>
+
