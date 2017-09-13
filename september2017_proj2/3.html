@@ -1,0 +1,119 @@
+
+<script type="text/javascript">
+//cookies + fetch
+
+function sendDataToServer(){
+
+
+	console.log("Send cookies to server !");
+
+	var f_a = document.getElementById("a_id").value;
+	var f_b = document.getElementById("b_id").value;
+
+	setCookie("cookie_a", f_a, 10);
+	setCookie("cookie_b", f_b, 10);
+
+	var postBody = document.cookie;  //JSON.stringify(); 
+
+	console.log(postBody);
+
+	let postData = {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+     body: JSON.stringify({ cookie_string : document.cookie })
+	};
+
+
+	let host = 'http://127.0.0.1:8283';
+	let link = '/cookies_to_server1';	
+
+
+	//read cookies
+
+
+	// ---------- my functions ------------------------------
+
+	// postBody -> var x = document.cookies ????
+	
+	//var url = "http://127.0.0.1:8283/cookies_to_server1";
+
+	//fetch( url , postBody)
+
+	//.then()
+
+	//.catch(){}	
+
+	fetch(host + link, postData)
+        .then(resp => {
+         return resp.json();
+        })
+        .then(r => {
+         //back-end response here
+        //*********************************************************************** */
+	//document.getElementById("server_answer").innerHTML = "Server answer"; 
+      })
+      .catch(err => {
+        console.log('404 error, page not found');
+        console.log('ERR', err);
+});
+
+
+
+
+	//--------- w3school cookies handler ---------------------
+
+	function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    var expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
+function checkCookie() {
+    var user = getCookie("username");
+    if (user != "") {
+        alert("Welcome again " + user);
+    } else {
+        user = prompt("Please enter your name:", "");
+        if (user != "" && user != null) {
+            setCookie("username", user, 365);
+        }
+    }
+} 
+
+
+}
+
+</script>
+
+<html>
+<title> Cookies to server, test 2 </title>
+<body>
+	<h1>  Cookies to server, test 2  </h1>
+	<br /><br />
+	Cookies A: <input type="text" id="a_id" /><br />
+	Cookies B: <input type="text" id="b_id" /><br />
+	<button onClick="sendDataToServer()"> Send cookies to server </button>
+	<br /><br />
+	Server reply : <p id="server_answer"></p>
+</body>
+</html>
+
