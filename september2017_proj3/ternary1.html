@@ -1,0 +1,69 @@
+<script type="text/javascript">
+
+//ternary operator test 1
+function ternary1(){
+
+	var a = 10, b = 54, x = 3, y = 7;
+
+	// if ( a > b){ result = x } else result = y;
+	var result = a > b ? x : y;
+	
+	document.getElementById("r").innerHTML = result; 
+
+	console.log("*******");
+	
+}
+
+//ternary operator test 2
+function ternary2(){
+
+	var a = 10, b = 25, c = "ready"; // a is smaller than b and c value is "ready" then statement is true
+	var x = "done";
+	
+	var d ="exception"; // if other value then "exception fail"
+	var e = "exception works";
+	var f = "exception fail";
+
+	// if (a > b && c == "ready" ){ result = x } 
+	//else { 
+	//	if(d == "exception") { result  = e; } 
+	//      else { result = f; }   
+	//}
+	var result = (a > b) && (c === "ready") ? x : d === "exception" ? e : f;    
+
+	document.getElementById("r2").innerHTML = result; 
+
+	console.log("+++++");
+
+}
+
+
+function allerttest(){
+	//open 10 tabs in browser
+		var url = "http://google.com";
+	   console.log("alert test !S");
+	   for(var i = 0; i < 10; i++) window.open(url); //alert('Message ' + i);
+	//alert("Ok"); 
+}
+
+
+
+</script>
+
+<html>
+<title> Ternary operator test 1</title>
+<body>
+<h1> Ternary operator test 1 </h1>
+<br />
+<button onClick="ternary1()"> ternary result </button>
+<br />
+Answer : <p id="r"> </p> 
+<br />
+<button onClick="ternary2()"> ternary result </button>
+<br />
+Answer 2 : <p id="r2"> </p>
+<br /><br />
+Alert : <button onClick="allerttest()"> open 10 google - tabs in browser </button>
+
+</body>
+</html>
